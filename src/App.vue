@@ -13,7 +13,6 @@
 <script>
 
 import myToolbar from "@/components/MyToolbar";
-
 export default {
   name: "app",
   components: {myToolbar},
