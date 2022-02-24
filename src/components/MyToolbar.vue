@@ -12,17 +12,19 @@
             <i class="fas fa-home"></i>
           </router-link>
         </li>
+
         <li>
           <router-link to="/Me">
-          <i class="fas fa-user"></i>
+            <b-icon icon="person-square"></b-icon>
           </router-link>
         </li>
+
         <li>
-          <router-link to="/Liked">
-          <i class="fas fa-heart"></i>
-          <span id="nav-notif"></span>
+          <router-link to="/Login">
+            <b-icon icon="box-arrow-in-right"></b-icon>
           </router-link>
         </li>
+
       </ul>
     </div>
   </nav>
