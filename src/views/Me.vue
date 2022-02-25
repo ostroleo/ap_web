@@ -29,11 +29,11 @@ export default {
   name: 'Profile',
   components: {myToolbar},
   mounted: function () {
-    console.log(this.$store.state.user);
-    if (this.$store.state.user.userId === -1) {
-      this.$router.push('/');
-      return ;
-    }
+    // console.log(this.$store.state.user);
+    // if (this.$store.state.user.userId === -1) {
+    //   this.$router.push('/');
+    //   return ;
+    // }
     this.$store.dispatch('getUserInfos');
   },
   computed: {
@@ -62,14 +62,14 @@ export default {
   max-width: 100%;
 }
 
-body {
-/*  background-image: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);*/
+/*body {*/
+/*  background-image: linear-gradient(62deg, #a8def8 0%, #1976d2 100%);*/
 /*  display: flex;*/
 /*  align-items: center;*/
 /*  justify-content: center;*/
 /*  min-height: 100vh;*/
-  padding:32px;
-}
+/*  padding:32px;*/
+/*}*/
 
 img {
   max-width: 100%;

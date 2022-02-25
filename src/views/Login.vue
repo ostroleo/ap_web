@@ -24,24 +24,25 @@
         <div class="form-row">
           <input v-model="password" class="form-row__input" type="password" placeholder="Mot de passe"/>
         </div>
-            <div class="form-row" v-if="mode === 'login' && status === 'error_login'">
-              Adresse mail et/ou mot de passe invalide
-            </div>
-            <div class="form-row" v-if="mode === 'create' && status === 'error_create'">
-              Adresse mail déjà utilisée
-            </div>
-            <div class="form-row">
-        <button @click="login()" class="button" :class="{'button&#45;&#45;disabled' : !validatedFields}"
-                v-if="mode === 'login'">
-<!--          <span v-if="status == 'loading'">Connexion en cours...</span>-->
-          <span >Connexion</span>
+        <!--            <div class="form-row" v-if="mode === 'login' && status === 'error_login'">-->
+        <!--              Adresse mail et/ou mot de passe invalide-->
+        <!--            </div>-->
+        <!--            <div class="form-row" v-if="mode === 'create' && status === 'error_create'">-->
+        <!--              Adresse mail déjà utilisée-->
+        <!--            </div>-->
+        <div class="form-row">
+          <button @click="login()" class="button" :class="{'button&#45;&#45;disabled' : !validatedFields}"
+                  v-if="mode === 'login'">
+            <!--          <span v-if="status == 'loading'">Connexion en cours...</span>-->
+            <span>Connexion</span>
 
-        </button>
-        <button @click="createAccount()" class="button" :class="{'button--disabled' : !validatedFields}" v-else>
-<!--                <span v-if="status === 'loading'">Création en cours...</span>-->
-          <span >Créer mon compte</span>
-        </button>
-            </div></div>
+          </button>
+          <button @click="createAccount()" class="button" :class="{'button--disabled' : !validatedFields}" v-else>
+            <!--                <span v-if="status === 'loading'">Création en cours...</span>-->
+            <span>Créer mon compte</span>
+          </button>
+        </div>
+      </div>
     </b-container>
   </div>
 
@@ -51,7 +52,8 @@
 <script>
 
 import myToolbar from "@/components/MyToolbar";
-import { mapState } from 'vuex'
+import {mapState} from 'vuex'
+import axios from "axios";
 
 export default {
   name: "Login",
@@ -69,10 +71,10 @@ export default {
     }
   },
   mounted: function () {
-    if (this.$store.state.user.userId !== -1) {
-      this.$router.push('/profile');
-      return ;
-    }
+    // if (this.$store.state.user.userId !== -1) {
+    //   this.$router.push('/profile');
+    //   return ;
+    // }
   },
   computed: {
     validatedFields: function () {
@@ -99,38 +101,46 @@ export default {
     },
     switchToLogin: function () {
       this.mode = 'login';
-    }
-  },
-  login: function () {
-    const self = this;
-    this.$store.dispatch('login', {
-      email: this.email,
-      password: this.password,
-    }).then(function () {
-      self.$router.push('/Me');
-    }, function (error) {
-      console.log(error);
-    })
-  },
+    },
 
-  createAccount: function () {
-    const self = this;
-    this.$store.dispatch('createAccount', {
-      email: this.email,
-      nom: this.nom,
-      prenom: this.prenom,
-      tel: this.tel,
-      adresse: this.adresse,
-      dateNaiss: this.dateNaiss,
-      password: this.password,
-    }).then(function () {
-      self.login();
-    }, function (error) {
-      console.log(error);
-    })
-  },
+    login: function () {
+      console.log(this.email)
+      axios.get(`http://192.168.218.2/api/returnInternaute`)
+          .then(res => {
+            console.log(res)
+          })
+          .catch(err => {
+            console.log(err)
+          })
+      // const self = this;
+      // this.$store.dispatch('login', {
+      //   email: this.email,
+      //   password: this.password,
+      // }).then(function () {
+      //   self.$router.push('/Me');
+      // }, function (error) {
+      //   console.log(error);
+      // })
+    },
+
+    createAccount: function () {
+      const self = this;
+      this.$store.dispatch('createAccount', {
+        email: this.email,
+        nom: this.nom,
+        prenom: this.prenom,
+        tel: this.tel,
+        adresse: this.adresse,
+        dateNaiss: this.dateNaiss,
+        password: this.password,
+      }).then(function () {
+        self.login();
+      }, function (error) {
+        console.log(error);
+      })
+    },
+  }
 }
-
 
 
 </script>

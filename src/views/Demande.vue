@@ -27,3 +27,5 @@ export default {
   components: {myToolbar},
 }
 </script>
+
+<style scoped>

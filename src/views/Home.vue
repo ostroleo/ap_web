@@ -12,11 +12,9 @@
             img-src="/service.jpg"
             img-alt="Image service"
             text-variant="black"
-            title="Service"
+            title="Besoin d'un service?"
         >
-          <b-card-text>
-            Besoin d'un service?
-          </b-card-text>
+
           <b-button pill href="/Demande" >Cliquez ici</b-button>
         </b-card>
       </div><br><br>
@@ -82,9 +80,10 @@ export default {
         .then(reponse => (this.services = reponse.data))
   },
   computed: {
+    searchKey:'',
     filteredList(){
       return this.services.filter((SERVICE) => {
-        return SERVICE.DESCRIPTIFSERVICE.toLowerCase().includes(this.searchKey.toLowerCase());
+        return SERVICE.INTITULE.toLowerCase().includes(this.searchKey.toLowerCase());
       })
     }
   }
